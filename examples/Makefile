@@ -4,10 +4,14 @@ SHELL := /bin/bash
 .DELETE_ON_ERROR:
 .PHONY: all test clean
 
+CC := gcc
+CXX := g++
+
+
 all: test-strict_fstream ztxtpipe zpipe zc
 
 %: %.cpp
-	g++ -std=c++11 -O0 -g3 -ggdb -fno-eliminate-unused-debug-types -Wall -Wextra -pedantic -I../src -o $@ $^ -lz
+	$(CXX) -std=c++11 -O0 -g3 -ggdb -fno-eliminate-unused-debug-types -Wall -Wextra -pedantic -I../src -o $@ $^ -lz
 
 test: ztxtpipe zpipe zc
 	diff -q ztxtpipe.cpp <(./ztxtpipe <ztxtpipe.cpp)
