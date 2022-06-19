@@ -12,7 +12,7 @@ jobs:
             - os: ubuntu-20.04
               cxx: g++ 
             - os: macos-10.15
-              cxx: clang
+              cxx: clang++
             - os: macos-10.15
               cxx: g++
         fail-fast: false
