@@ -24,9 +24,15 @@ jobs:
         - name: "Checkout"
           uses: actions/checkout@v2
 
-        - name: "Build"
-          working-directory: examples
+        - name: "Create build directory"
           run: |
-            make CXX=${{ matrix.cxx }}
+            mkdir -p build
+
+        - name: "Build"
+          working-directory: build
+          run: |
+            cmake ..
+            make 
+            bash ../examples/run-tests.sh ../examples
 
 

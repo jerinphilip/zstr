@@ -38,6 +38,17 @@ set(ZSTR_LIBRARIES "${ZLIB_LIBRARIES}" CACHE PATH "" FORCE)
 
 # -- print target summary
 
+set(BINARIES
+  test-strict_fstream
+  ztxtpipe
+  zpipe
+  zc)
+
+foreach(BINARY ${BINARIES})
+  add_executable("${BINARY}" "${CMAKE_SOURCE_DIR}/examples/${BINARY}.cpp")
+  target_link_libraries(${BINARY} zstr)
+endforeach()
+
 message(STATUS
   "zstr - added INTERFACE target 'zstr::zstr'
           includes : ${ZSTR_INCLUDE_DIRS}
