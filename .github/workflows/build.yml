@@ -10,11 +10,7 @@ jobs:
         matrix:
           include:
             - os: ubuntu-20.04
-              cxx: g++ 
             - os: macos-10.15
-              cxx: clang++
-            - os: macos-10.15
-              cxx: g++
         fail-fast: false
 
       name: "Build"
@@ -35,4 +31,18 @@ jobs:
             make 
             bash ../examples/run-tests.sh ../examples
 
+
+    cibuildwheel:
+      name: "cibuildwheel"
+      runs-on: macos-10.15
+      steps:
+        - name: Build wheels
+          uses: pypa/cibuildwheel@v2.6.1
+          env:
+            CIBW_BEFORE_BUILD_MACOS: |
+              cd {project}
+              cmake ..
+              make 
+              bash ../examples/run-tests.sh ../examples
+            CIBW_BUILD: "cp310-macosx_x86_64"
 
